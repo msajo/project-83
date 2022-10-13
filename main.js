@@ -1,18 +1,40 @@
 var mouseEvent = "empty";
+var width = screen.width;
+var new_width = width -70;
+var new_heigth = screen.height -300;
+var last_position_of_x, last_position_of_y;
 canvas = document.getElementById('myCanvas');
     ctx = canvas.getContext("2d");
+    
     color = "black";
     width_of_line = 2;
 
-    canvas.addEventListener("mousedown", my_mousedown); 
-    function my_mousedown(e){
-        mouseEvent = "mousedown";
-    }  
+if(width < 992){
+    document.getElementById("myCanvas").width = new_width;
+    document.getElementById("myCanvas").height = new_heigth;
+    document.body.style.overflow = "hidden";
+}
+
+
+
+    
+
+    canvas.addEventListener("mousedown", my_mousedown);
+    
+    function my_mousedown(e)
+    {
+        //Addictonal Activity start
+        //color = document.getElementById("color").value;
+        //width_of_line = document.getElementById("width_of_line").value;
+        //Addictonal Activity ends
+
+        mouseEvent = "mouseDown";
+    }
 
     canvas.addEventListener("mouseup", my_mouseup);
     function my_mouseup(e)
     {
-        mouseEvent = "mouseup";
+        mouseEvent = "mouseUP";
     }
 
     canvas.addEventListener("mouseleave", my_mouseleave);
@@ -22,8 +44,10 @@ canvas = document.getElementById('myCanvas');
     }
 
     canvas.addEventListener("mousemove", my_mousemove);
-function my_mousemove(e){
-    current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
+    function my_mousemove(e)
+    {
+
+         current_position_of_mouse_x = e.clientX - canvas.offsetLeft;
          current_position_of_mouse_y = e.clientY - canvas.offsetTop;
 
         if (mouseEvent == "mouseDown") {
@@ -44,7 +68,6 @@ function my_mousemove(e){
         last_position_of_x = current_position_of_mouse_x; 
         last_position_of_y = current_position_of_mouse_y;
     }
-
     canvas.addEventListener("touchstart", my_touchstart);
     function my_touchstart(e){
         last_position_of_x = e.touches[0].clientX - canvas.offsetLeft;
@@ -73,3 +96,4 @@ function my_mousemove(e){
         last_position_of_x = current_position_of_mouse_x; 
         last_position_of_y = current_position_of_mouse_y;
     }
+
